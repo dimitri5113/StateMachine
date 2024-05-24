@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 public enum IAState
 {
     None,
@@ -15,7 +16,9 @@ public enum IAState
 public class MouseyController : MonoBehaviour
 {
     private IAState state = IAState.None;
-    [SerializeField] private Animator animator;
+    [SerializeField] public Animator animator;
+    [SerializeField] public NavMeshAgent agent;
+    [SerializeField] public GameObject waypoint;
     public bool IsWaving;
     public bool IsJoyfulJump;
     void Start()
@@ -40,7 +43,7 @@ public class MouseyController : MonoBehaviour
 
                 break;
             case IAState.HappyWalk:
-
+                agent.SetDestination(waypoint.transform.position);
                 break;
             case IAState.SillyDAncing:
 
